@@ -1,5 +1,5 @@
 # Ex.05 Design a Website for Server Side Processing
-## Date:
+## Date:23/10/25
 
 ## AIM:
  To design a website to calculate the power of a lamp filament in an incandescent bulb in the server side. 
@@ -32,13 +32,128 @@ Create a HTML file to implement form based input and output.
 Publish the website in the given URL.
 
 ## PROGRAM :
+```
+<html>
 
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>POWER OF LAMP IN INCANDESCENT BULD</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <style type="text/css">
+        body {
+            background-color:white;
+        }
 
+        .edge {
+            display: flex;
+            height: 100vh;
+            width: 100%;    
+            justify-content: center;
+            align-items: center;
+        }
+
+        .box {
+            display: block;
+            width: 500px;
+            min-height: 300px;
+            font-size: 20px;
+            background: rgb(21, 208, 215);
+            background: linear-gradient(90deg, rgb(99, 237, 118) 9%, rgb(193, 166, 202) 56%);
+            border-radius: 10px;
+            box-shadow: rgba(239, 5, 24, 0.35) 0px 5px 15px;
+        }
+
+        .formelt {
+            color: whitesmoke;
+            text-align: center;
+            margin-top: 7px;
+            margin-bottom: 6px;
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+            padding-top: 20px;
+        }
+        input{
+            margin: 5px;
+            padding: 5px;
+            border-radius: 5px;
+            border: none;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="edge">
+        <div class="box">
+            <h1>POWER OF LAMP IN INCANDESCENT BULB</h1>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="formelt">
+                    INTENSITY : <input type="text" name="Intensity" value="{{I}}"></input>(in A)<br />
+                </div>
+                <div class="formelt">
+                    RESISITANCE : <input type="text" name="Resistence" value="{{R}}"></input>(in Ω)<br />
+                </div>
+                <div class="formelt">
+                    <input type="submit" value="Calculate"></input><br />
+                </div>
+                <div class="formelt">
+                    POWER : <input type="text" name="Power" value="{{Power}}"></input>W<br />
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
+```
+```
+views.py
+
+from django.shortcuts import render
+
+def rectarea(request):
+    context = {}
+    context['area'] = "0"
+    context['l'] = "0"
+    context['b'] = "0"
+    if request.method == 'POST':
+        print("POST method is used")
+        l = request.POST.get('length', '0')
+        b = request.POST.get('breadth', '0')
+        print('request=', request)
+        print('Length=', l)
+        print('Breadth=', b)
+        area = int(l) * int(b)
+        context['area'] = area
+        context['l'] = l
+        context['b'] = b
+        print('Area=', area)
+    return render(request, 'mathapp/math.html', context)
+```
+```
+urls.py
+
+from django.contrib import admin
+from django.urls import path
+from mathapp import views
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('areaofrectangle/', views.rectarea, name="areaofrectangle"),
+    path('', views.rectarea, name="areaofrectangleroot")
+]
+```
 ## SERVER SIDE PROCESSING:
+![alt text](2.png)
 
 
 ## HOMEPAGE:
-
+![alt text](server.png)
 
 ## RESULT:
 The program for performing server side processing is completed successfully.
