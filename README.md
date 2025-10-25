@@ -149,7 +149,8 @@ urlpatterns = [
 ]
 ```
 ## SERVER SIDE PROCESSING:
-![Uploading Screenshot 2025-10-25 142902.png…]()
+<img width="1218" height="266" alt="Screenshot 2025-10-25 142902" src="https://github.com/user-attachments/assets/34e4f044-c6d0-4248-9000-453445f069d6" />
+
 
 
 
